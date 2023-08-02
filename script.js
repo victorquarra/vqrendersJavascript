@@ -1,10 +1,15 @@
 const btnCart = document.querySelector('.container-cart-icon');
 const containerCartProducts = document.querySelector(
-	'.container-cart-products'
+	'.container-cart-products',
+	document.addEventListener("DOMContentLoaded", () => {
+		containerCartProducts = JSON.parse(localStorage.getItem("containerCartProducts"))
+	})
+	
 );
 
 btnCart.addEventListener('click', () => {
 	containerCartProducts.classList.toggle('hidden-cart');
+
 });
 
 /* ========================= */
