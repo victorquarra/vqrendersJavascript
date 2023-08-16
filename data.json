@@ -1,0 +1,5 @@
+[
+    {"nombre": "Render", "precio": 40000, "id": 1},
+    {"nombre": "Axonometria", "precio": 60000, "id": 2},
+    {"nombre": "Animacion", "precio": 200000, "id": 3}
+]
