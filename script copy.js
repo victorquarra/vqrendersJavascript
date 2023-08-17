@@ -99,22 +99,17 @@ function reloadCard(){
                 <div>${value.name}</div>
                 <div>${value.price.toLocaleString()}</div>
                 <div>
-                    <button id="btn2-${value.id}">-</button>
+                    <button onclick="changeQuantity(${key}, ${value.quantity - 1})">-</button>
                     <div class="count">${value.quantity}</div>
-                    <button id="btn3-${value.id}">+</button>
+                    <button onclick="changeQuantity(${key}, ${value.quantity + 1})">+</button>
                 </div>`;
                 listCard.appendChild(newDiv);
-
-                const btn2 = document.getElementById(`btn-${value.id}`)
-                btn2.addEventListener("click", () => changeQuantity(key, value.quantity - 1))
-                const btn3 = document.getElementById(`btn-${value.id}`)
-                btn3.addEventListener("click", () => changeQuantity(key, value.quantity + 1))
         }
     })
     total.innerText = totalPrice.toLocaleString();
     quantity.innerText = count;
 }
-function changeQuantity(key, quantity, products){
+function changeQuantity(key, quantity){
     if(quantity == 0){
         delete listCards[key];
     }else{
