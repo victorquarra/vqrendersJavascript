@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "RENDER",
+        "image": "1.PNG",
+        "price": 40000
+    },
+    {
+        "id": 2,
+        "name": "AXONOMETRIA",
+        "image": "2.PNG",
+        "price": 60000
+    },
+    {
+        "id": 3,
+        "name": "ANIMACION",
+        "image": "3.PNG",
+        "price": 220000
+    }
+]

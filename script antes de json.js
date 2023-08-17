@@ -12,7 +12,7 @@ openShopping.addEventListener('click', ()=>{
 closeShopping.addEventListener('click', ()=>{
     body.classList.remove('active');
 })
-/*
+
 let products = [
     {
         id: 1,
@@ -47,49 +47,6 @@ function initApp(){
     })
 }
 initApp();
-*/
-
-let listCards  = [];
-
-//const url = './data.json';
-
-fetch('./products.json')
-.then(resp => resp.json())
-.then(products => initApp(products))
-
-function initApp(products){
-    //console.log("EN LA FUNCION");
-    //console.log(products);
-    products.forEach((value, key) =>{
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('item');
-        newDiv.innerHTML = `
-            <img src="image/${value.image}">
-            <div class="title">${value.name}</div>
-            <div class="price">${value.price.toLocaleString()}</div>
-            <button onclick="addToCard(${key})">Agregar al carrito</button>`;
-        list.appendChild(newDiv);
-})
-//initApp();
-}
-/*
-function initApp(){
-    products.forEach((value, key) =>{
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('item');
-        newDiv.innerHTML = `
-            <img src="image/${value.image}">
-            <div class="title">${value.name}</div>
-            <div class="price">${value.price.toLocaleString()}</div>
-            <button onclick="addToCard(${key})">Agregar al carrito</button>`;
-        list.appendChild(newDiv);
-    })
-}
-initApp();
-*/
-
-
-
 function addToCard(key){
     if(listCards[key] == null){
         // copy product form list to list card
