@@ -12,46 +12,8 @@ openShopping.addEventListener('click', ()=>{
 closeShopping.addEventListener('click', ()=>{
     body.classList.remove('active');
 })
-/*
-let products = [
-    {
-        id: 1,
-        name: 'RENDER',
-        image: '1.PNG',
-        price: 40000
-    },
-    {
-        id: 2,
-        name: 'AXONOMETRIA',
-        image: '2.PNG',
-        price: 60000
-    },
-    {
-        id: 3,
-        name: 'ANIMACION',
-        image: '3.PNG',
-        price: 220000
-    },
-];
-let listCards  = [];
-function initApp(){
-    products.forEach((value, key) =>{
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('item');
-        newDiv.innerHTML = `
-            <img src="image/${value.image}">
-            <div class="title">${value.name}</div>
-            <div class="price">${value.price.toLocaleString()}</div>
-            <button onclick="addToCard(${key})">Agregar al carrito</button>`;
-        list.appendChild(newDiv);
-    })
-}
-initApp();
-*/
 
 let listCards  = [];
-
-//const url = './data.json';
 
 fetch('./products.json')
 .then(resp => resp.json())
@@ -77,15 +39,22 @@ function initApp(products){
 }
 
 function addToCard(key,products){
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Agregaste el producto al carrito',
+        showConfirmButton: false,
+        timer: 1500
+    })
     if(listCards[key] == null){
         // copy product form list to list card
         listCards[key] = JSON.parse(JSON.stringify(products[key]));
         listCards[key].quantity = 1;
     }
     localStorage.setItem('carrito', JSON.stringify(listCards));
-    reloadCard();
+    reloadCard(products);
 }
-function reloadCard(){
+function reloadCard(products){
     listCard.innerHTML = '';
     let count = 0;
     let totalPrice = 0;
@@ -105,10 +74,10 @@ function reloadCard(){
                 </div>`;
                 listCard.appendChild(newDiv);
 
-                const btn2 = document.getElementById(`btn-${value.id}`)
-                btn2.addEventListener("click", () => changeQuantity(key, value.quantity - 1))
-                const btn3 = document.getElementById(`btn-${value.id}`)
-                btn3.addEventListener("click", () => changeQuantity(key, value.quantity + 1))
+                const btn2 = document.getElementById(`btn2-${value.id}`)
+                btn2.addEventListener("click", () => changeQuantity(key, value.quantity - 1,products))
+                const btn3 = document.getElementById(`btn3-${value.id}`)
+                btn3.addEventListener("click", () => changeQuantity(key, value.quantity + 1,products))
         }
     })
     total.innerText = totalPrice.toLocaleString();
@@ -118,8 +87,10 @@ function changeQuantity(key, quantity, products){
     if(quantity == 0){
         delete listCards[key];
     }else{
+        if (products && products[key]){
         listCards[key].quantity = quantity;
         listCards[key].price = quantity * products[key].price;
     }
-    reloadCard();
+}
+    reloadCard(products);
 }
